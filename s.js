@@ -17,7 +17,7 @@ http.createServer(function (req, res) {
 		return;
 	}
 	rand = Math.floor(Math.random() * Math.floor(100000));
-	cmd = "wget --no-check-certificate --max-redirect=20 -O " + rand + "tempfile https:\/\/files.misskey.gothloli.club" + req.url + " >\/dev\/null 2>&1; IPFS_PATH=\/ipfsrepo ipfs add -n " + rand + "tempfile 2>\/dev\/null| tr -d \'\\n\'| tr -d \'\\r\' | sed \'s\/.*added\\s*\\(\\w*\\)\\s*" + rand + "tempfile.*\/\\1\/\'; rm " + rand + "tempfile";
+	cmd = "wget --no-check-certificate --max-redirect=20 -O " + rand + "tempfile https:\/\/files.misskey.gothloli.club" + req.url + " >\/dev\/null 2>&1; ipfs add " + rand + "tempfile 2>\/dev\/null| tr -d \'\\n\'| tr -d \'\\r\' | sed \'s\/.*added\\s*\\(\\w*\\)\\s*" + rand + "tempfile.*\/\\1\/\'; rm " + rand + "tempfile";
 	exec(cmd, function(error, stdout, stderr){
 		if(error){
 			res.status(404);
